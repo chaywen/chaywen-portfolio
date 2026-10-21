@@ -1,0 +1,10 @@
+/* Tools follow the task; preferences and original feature hooks are retained. */
+.reading-settings{padding:10px 18px;gap:8px}.reading-settings .settings-label{width:auto;margin:0 8px 0 0;font-size:12px}.reading-settings #reading-tools-btn{margin-left:auto}
+#reading-tools-panel{align-items:center}#reading-tools-panel .font-choice{order:-1}.mode-guidance{font:12px/1.65 Arial,sans-serif;color:#80766f;margin:12px 0 20px;max-width:75ch}
+#app[data-mode=write] .reading-settings,#app[data-mode=form] .reading-settings,#app[data-mode=write] #reading-tools-panel,#app[data-mode=form] #reading-tools-panel,#app[data-mode=write] .reader-transport,#app[data-mode=form] .reader-transport,#app[data-mode=write] .explain-group,#app[data-mode=form] .explain-group{display:none!important}
+#app[data-help-collapsed=true] .main-layout{grid-template-columns:minmax(0,1fr)}#app[data-help-collapsed=true] #lexi-assistant{display:none!important}
+#assistant-toggle{font-size:12px;white-space:nowrap;margin-left:auto}#reading-text{margin-top:20px}.read-source-selector,.form-source-selector{padding-top:24px}.assistant-heading p{font-size:12px}
+#app[data-mode=read] .mode-guidance,#app[data-mode=form][data-sample=false] .mode-guidance{display:none}
+.sample-guide{font:13px/1.75 Arial,sans-serif;color:var(--muted);margin:0 0 18px;border-bottom:1px solid var(--border);padding-bottom:10px;max-width:75ch}.sample-guide[hidden]{display:none!important}.sample-guide summary{cursor:pointer;color:var(--accent);padding-block:5px}.sample-guide ol{padding-left:22px;margin:10px 0}.sample-guide li{margin-block:6px}.sample-guide p{margin:10px 0 0}
+#write-mode-panel .write-actions{gap:8px;flex-wrap:wrap}#write-mode-panel .write-controls-top{padding-bottom:10px;border-bottom:1px solid var(--border)}
+@media(max-width:760px){.reading-settings{padding:10px 12px}.reading-settings .settings-label{font-size:11px;margin-right:0}.reading-settings #reading-tools-btn{margin-left:auto;font-size:11px}#reader-size{min-width:34px}.mode-guidance{margin-block:10px 16px}.panel-header{gap:8px}#assistant-toggle{padding:7px 10px;min-height:34px}}

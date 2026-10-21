@@ -1,0 +1,20 @@
+/* Keep the notebook's visual voice; improve the readability of its evidence. */
+.hero-resume{font:17px var(--hand);color:var(--blue);text-decoration:underline;text-underline-offset:4px}
+.featured-projects{align-items:start}
+.featured-project .featured-body>p:not(.eyebrow){font-size:13px;line-height:1.75}
+.featured-contribution span{font-size:12px;line-height:1.75}
+.featured-project .featured-preview,.project-figure .featured-preview{height:auto;aspect-ratio:1100/650}
+.featured-preview iframe{width:1100px;height:650px}
+.project-trial{padding-top:2px;color:#585e53}
+.project-trial>b{font:600 21px var(--hand);color:var(--blue)}
+.project-trial ol{margin:9px 0 12px;padding-left:20px;font-size:12px;line-height:1.8}
+.project-trial p{font-size:11px;line-height:1.7;margin:0;color:#716d60}
+.featured-body>small{font-size:10px;color:#746d5c}
+.individual-refinement{border-left:2px solid #b8aa85;padding-left:15px;margin-top:20px}
+.individual-refinement h4{margin-top:0;color:var(--blue)}
+.featured-body,.project-left,.project-right,.about-grid>div{min-width:0}
+.featured-actions .button{white-space:normal;text-align:center}
+.project-role,.project-summary,.ownership-note,.individual-refinement p{overflow-wrap:anywhere}
+.project-tabs{overflow-x:auto;scrollbar-width:thin}
+@media(max-width:760px){.hero-actions{gap:16px;flex-wrap:wrap}.project-trial ol{font-size:13px}.project-trial p{font-size:12px}.featured-contribution span{font-size:13px}.featured-preview>span{font-size:10px;padding:6px 9px;inset:auto 9px 9px auto}.featured-actions .button{flex:1 1 180px}.featured-actions .text-link{padding-block:8px}.project-tabs button{flex-shrink:0}.contact .email{overflow-wrap:anywhere}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}

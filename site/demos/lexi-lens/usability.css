@@ -1,0 +1,25 @@
+/* Original Lexi-Lens layout and purple/cream palette; usability fixes only. */
+.main-layout,body:has(#demo-notice:not([hidden])) .main-layout{height:calc(100vh - 42px);height:calc(100dvh - 42px);min-height:520px;gap:18px;padding:18px}
+.left-panel{padding-right:6px;min-width:280px}
+.left-unified-card,.right-unified-card{min-width:0}
+.camera-feed{min-height:145px;max-height:220px}
+.camera-controls,.controls-left,.controls-right,.control-bar,.source-buttons{flex-wrap:wrap;gap:8px}
+.control-bar{flex-shrink:0}
+.panel-header{flex-wrap:wrap;gap:10px}
+.view-toggle{flex-wrap:wrap;gap:6px}
+.btn,.btn-primary,.btn-outline{min-height:40px;line-height:1.4}
+.tools-panel{position:static;flex-basis:100%;order:3;flex-wrap:wrap;gap:8px;padding:12px 0 0;background:transparent;box-shadow:none;border:0;border-top:1px solid var(--border);border-radius:0;transform:none}
+.color-switcher{flex-wrap:wrap}
+.mode-dropdown{max-width:calc(100vw - 40px);z-index:30}
+.mode-dropdown button{border:0;background:none;text-align:left;padding:10px 14px;font:inherit;color:var(--text-strong);cursor:pointer;min-height:40px}
+.mode-dropdown button:hover,.mode-dropdown button:focus-visible{background:#f2edff}
+.url-control-group{flex-wrap:wrap;gap:8px}
+.url-control-group input{min-width:0;flex:1;min-height:42px}
+.text-display{overflow-y:auto;overscroll-behavior:contain;min-height:200px}
+.chat-message{overflow-wrap:anywhere}
+.modal-content{width:min(440px,90vw);max-height:85dvh;overflow:auto}
+.form-source-selector .source-buttons{justify-content:center}
+.form-view-header{flex-wrap:wrap;gap:10px}
+@media(max-width:1050px){.left-panel{width:34%;min-width:260px}.main-layout{gap:14px}.text-display{padding:18px}.control-bar{padding:12px}.camera-controls{padding:12px}.source-buttons button{font-size:12px}}
+@media(max-width:760px){.main-layout,body:has(#demo-notice:not([hidden])) .main-layout{height:auto;min-height:0;display:flex;flex-direction:column;padding:12px}.main-layout .left-panel,.main-layout .right-panel{width:100%;min-width:0;max-width:none;height:auto;resize:none;padding:0}.unified-card{height:auto}.camera-feed{max-height:190px}.chat-history{min-height:140px;max-height:250px}.text-display{min-height:320px;max-height:none;overflow:visible}.tools-panel{max-height:none}.right-panel{min-height:0}.panel-header .view-toggle{width:100%}}
+@media(max-height:680px) and (min-width:761px){.main-layout,body:has(#demo-notice:not([hidden])) .main-layout{height:auto;min-height:520px}.unified-card{min-height:510px}.text-display{max-height:440px}.camera-feed{min-height:120px;max-height:165px}}

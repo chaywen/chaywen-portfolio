@@ -1,0 +1,180 @@
+{
+  "match": {
+    "sample": true,
+    "scenario": "match",
+    "engine": "Existing deterministic comparison engine",
+    "persists_review": false,
+    "result": {
+      "status": "OK",
+      "has_defect": false,
+      "defect_fields": [],
+      "undecidable_fields": [],
+      "possible_fields": [],
+      "review_reason": null,
+      "field_results": [
+        {
+          "field": "shipper",
+          "si_value": "Garden Export Sdn Bhd",
+          "bl_value": "Garden Export Sdn Bhd",
+          "match": true
+        },
+        {
+          "field": "consignee",
+          "si_value": "Harbour Trading Ltd",
+          "bl_value": "Harbour Trading Ltd",
+          "match": true
+        },
+        {
+          "field": "notify_party",
+          "si_value": "Harbour Trading Ltd",
+          "bl_value": "Harbour Trading Ltd",
+          "match": true
+        },
+        {
+          "field": "port_of_loading",
+          "si_value": "PORT KLANG (MYPKG)",
+          "bl_value": "PORT KLANG (MYPKG)",
+          "match": true
+        },
+        {
+          "field": "port_of_discharge",
+          "si_value": "SINGAPORE (SGSIN)",
+          "bl_value": "SINGAPORE (SGSIN)",
+          "match": true
+        },
+        {
+          "field": "container_count",
+          "si_value": 3,
+          "bl_value": 3,
+          "match": true
+        },
+        {
+          "field": "gross_weight_kg",
+          "si_value": 12000,
+          "bl_value": 12000,
+          "match": true
+        }
+      ]
+    }
+  },
+  "mismatch": {
+    "sample": true,
+    "scenario": "mismatch",
+    "engine": "Existing deterministic comparison engine",
+    "persists_review": false,
+    "result": {
+      "status": "MISMATCH",
+      "has_defect": true,
+      "defect_fields": [
+        "container_count"
+      ],
+      "undecidable_fields": [],
+      "possible_fields": [],
+      "review_reason": null,
+      "field_results": [
+        {
+          "field": "shipper",
+          "si_value": "Garden Export Sdn Bhd",
+          "bl_value": "Garden Export Sdn Bhd",
+          "match": true
+        },
+        {
+          "field": "consignee",
+          "si_value": "Harbour Trading Ltd",
+          "bl_value": "Harbour Trading Ltd",
+          "match": true
+        },
+        {
+          "field": "notify_party",
+          "si_value": "Harbour Trading Ltd",
+          "bl_value": "Harbour Trading Ltd",
+          "match": true
+        },
+        {
+          "field": "port_of_loading",
+          "si_value": "PORT KLANG (MYPKG)",
+          "bl_value": "PORT KLANG (MYPKG)",
+          "match": true
+        },
+        {
+          "field": "port_of_discharge",
+          "si_value": "SINGAPORE (SGSIN)",
+          "bl_value": "SINGAPORE (SGSIN)",
+          "match": true
+        },
+        {
+          "field": "container_count",
+          "si_value": 3,
+          "bl_value": 4,
+          "match": false
+        },
+        {
+          "field": "gross_weight_kg",
+          "si_value": 12000,
+          "bl_value": 12000,
+          "match": true
+        }
+      ]
+    }
+  },
+  "missing": {
+    "sample": true,
+    "scenario": "missing",
+    "engine": "Existing deterministic comparison engine",
+    "persists_review": false,
+    "result": {
+      "status": "NEEDS_REVIEW",
+      "has_defect": false,
+      "defect_fields": [],
+      "undecidable_fields": [
+        "gross_weight_kg"
+      ],
+      "possible_fields": [],
+      "review_reason": "missing_value",
+      "field_results": [
+        {
+          "field": "shipper",
+          "si_value": "Garden Export Sdn Bhd",
+          "bl_value": "Garden Export Sdn Bhd",
+          "match": true
+        },
+        {
+          "field": "consignee",
+          "si_value": "Harbour Trading Ltd",
+          "bl_value": "Harbour Trading Ltd",
+          "match": true
+        },
+        {
+          "field": "notify_party",
+          "si_value": "Harbour Trading Ltd",
+          "bl_value": "Harbour Trading Ltd",
+          "match": true
+        },
+        {
+          "field": "port_of_loading",
+          "si_value": "PORT KLANG (MYPKG)",
+          "bl_value": "PORT KLANG (MYPKG)",
+          "match": true
+        },
+        {
+          "field": "port_of_discharge",
+          "si_value": "SINGAPORE (SGSIN)",
+          "bl_value": "SINGAPORE (SGSIN)",
+          "match": true
+        },
+        {
+          "field": "container_count",
+          "si_value": 3,
+          "bl_value": 3,
+          "match": true
+        },
+        {
+          "field": "gross_weight_kg",
+          "si_value": 12000,
+          "bl_value": null,
+          "match": null
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en" data-portfolio-demo="true">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LexiLens | Accessible reading companion</title>
+  <meta http-equiv="Content-Security-Policy" content="
+default-src 'self';
+img-src 'self' blob: data:;
+media-src 'self' blob: mediastream:;
+connect-src 'self'
+http://127.0.0.1:8000
+ws://127.0.0.1:8000
+http://localhost:8000
+ws://localhost:8000
+http://127.0.0.1:5500
+ws://127.0.0.1:5500;
+script-src 'self' 'unsafe-inline';
+style-src 'self' 'unsafe-inline';
+">
+  <link rel="stylesheet" href="style.css"><link rel="stylesheet" href="usability.css">
+<link rel="stylesheet" href="product.css"><link rel="stylesheet" href="workflow.css"></head>
+<body>
+  <!-- Privacy Modal -->
+  <div id="privacy-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="privacy-title">
+    <div class="modal-content">
+      <h2 id="privacy-title">Privacy Notice</h2>
+      <p>
+        Live features send the text, audio, or images you choose to share to the backend and Google's Gemini service.
+        Camera and microphone access require your permission. You can explore the sample demo without sharing content.
+      </p>
+      <button id="consent-btn" class="btn">I Agree</button>
+      <p><a href="?demo=1">Explore the sample demo instead</a></p>
+    </div>
+  </div>
+  <div id="app" class="theme-nano">
+    <header class="product-header"><a class="product-wordmark" href="?">lexilens<span>Reading, at your pace.</span></a><nav id="workspace-nav" aria-label="Workspace"><button type="button" data-workspace-mode="read" aria-pressed="true">Read</button><button type="button" data-workspace-mode="write" aria-pressed="false">Write</button><button type="button" data-workspace-mode="form" aria-pressed="false">Forms</button></nav><div id="status-indicator" class="status-offline" role="status" aria-live="polite">Choose live mode or sample demo</div>
+    <div id="demo-notice" role="status" hidden aria-label="Sample demo with prepared text and notes. No AI requests or camera access." title="Prepared text and notes. No AI requests or camera access.">Sample · no live AI. <a href="https://github.com/chaywen/lexi-lens" target="_blank" rel="noopener">Project source ↗</a>
+    </div>
+    </header><div class="main-layout">
+      <!-- Left Panel (Resizable) -->
+      <div class="left-panel" id="lexi-assistant">
+        <!-- Unified Left Card -->
+        <div class="card unified-card left-unified-card">
+          
+          <div class="assistant-heading"><h2>Here to help</h2><p>Ask for a simpler explanation, or talk to Lexi.</p></div><details id="camera-preview"><summary>Camera preview</summary><div class="camera-feed unified-camera">
+            <div id="inline-error" class="inline-error"></div>
+            <div id="snapshot-thumb" class="snapshot-thumb">
+              <img id="snapshot-img" src="" alt="Snapshot Thumbnail">
+            </div>
+            <video id="video" autoplay muted playsinline></video>
+          </div>
+          </details><!-- Top: Camera Feed -->
+          <!-- Middle: Chat Log -->
+          <div class="chat-history unified-chat">
+            <div class="chat-scroll" id="chat-scroll" role="log" aria-live="polite">
+              <div class="chat-message ai">Lexi: Hello! I am ready to read for you.</div>
+            </div>
+          </div>
+          <!-- Bottom: Action Controls -->
+          <div class="camera-controls">
+            <div class="controls-left">
+              <button id="mic-btn" class="btn mic-btn" aria-label="Mic">Talk to Lexi</button>
+              </div>
+            
+            <div class="controls-right">
+              <div class="mode-wrapper">
+                <button id="mode-toggle" class="btn">⚙ Mode</button>
+                <div class="mode-dropdown" id="mode-dropdown">
+                  <button type="button" data-mode="read">Read</button>
+                  <button type="button" data-mode="form">Form</button>
+                  <button type="button" data-mode="write">Write</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <div class="explain-group" style="display: flex; gap: 8px; align-items: center;">
+              <button id="explain-btn" class="btn-primary">Explain this text</button>
+              <button id="stop-explain-btn" class="btn btn-stop" title="Stop Explanation" style="display: none; width: 44px; height: 44px; min-width: 44px; border-radius: 50%; padding: 0; background: #ff4d4d; color: white; border: none; font-size: 18px; line-height: 1;">⏹</button>
+            </div>
+            </div>
+      </div>
+      <!-- Right Panel -->
+      <div class="right-panel">
+        <!-- Unified Right Card -->
+        <div class="card unified-card right-unified-card">
+          
+          <div class="reading-settings" role="group" aria-label="Reading preferences"><span class="settings-label">Text size</span><output id="reader-size" aria-live="polite">20 px</output><button id="font-decrease" class="btn-outline" aria-label="Decrease reading text size">A-</button>
+              
+              <button id="font-increase" class="btn-outline" aria-label="Increase reading text size">A+</button>
+              <button id="reading-tools-btn" class="btn-outline">Reading settings</button>
+            
+            </div><div id="reading-tools-panel" class="tools-panel hidden">
+              <button id="focus-mode-toggle" class="btn-outline" title="Dim surrounding text">🎯 Focus Mode</button>
+              <div class="color-switcher" title="Background Color">
+                <button class="color-dot" data-color="#FFFDF7" style="background:#FFFDF7;" title="Cream"></button>
+                <button class="color-dot" data-color="#F0F7FF" style="background:#F0F7FF;" title="Light Blue"></button>
+                <button class="color-dot" data-color="#F0FFF4" style="background:#F0FFF4;" title="Light Green"></button>
+                <button class="color-dot" data-color="#FFF5F5" style="background:#FFF5F5;" title="Light Pink"></button>
+                <button class="color-dot" data-color="#FFFFF0" style="background:#FFFFF0;" title="Light Yellow"></button>
+              </div>
+            <label class="line-choice">Line spacing <select id="reader-spacing"><option value="1.8">Comfortable</option><option value="2.2">Wide</option><option value="1.5">Compact</option></select></label><label class="font-choice">Font <select id="reader-font"><option value="Arial">Arial</option><option value="OpenDyslexic">OpenDyslexic</option><option value="Verdana">Verdana</option></select></label><button id="ruler-toggle" class="btn-outline" title="Toggle Reading Ruler">Reading ruler</button>
+              <button id="bionic-toggle" class="btn-outline" title="Toggle Bionic Reading">Bionic</button>
+              </div>
+          <!-- Text Display Area -->
+          <div class="text-display unified-text">
+            <div class="panel-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <div class="panel-title" style="margin-bottom: 0;">Your reading space</div>
+              <div class="view-toggle" style="display: none;" id="view-toggle-container">
+                <button id="view-original-btn" class="btn-outline active-toggle" style="padding: 4px 8px; font-size: 12px;">Original</button>
+                <button id="view-analyzed-btn" class="btn-outline" style="padding: 4px 8px; font-size: 12px;">Whole-text summary</button>
+              </div>
+            <button id="change-source-btn" class="btn btn-outline" style="display: none;">🔄 Change Source</button>
+            <button type="button" id="assistant-toggle" aria-controls="lexi-assistant" aria-expanded="true">Hide help</button></div>
+            <details id="sample-guide" class="sample-guide" hidden><summary>Try the reading sample</summary><ol><li>Use A+ or A− to find a comfortable text size. Reading settings contains font, spacing, paper colour and optional reading aids.</li><li>Try the Reading ruler or select a highlighted word for a prepared explanation.</li><li>Open Whole-text summary for prepared notes, or choose Read aloud to use your browser voice.</li></ol><p>Your text preferences are saved in this browser when storage is available. This sample does not connect to live AI, capture or uploads. Choose the tools that suit you; no reading aid is required.</p></details><p id="mode-guidance" class="mode-guidance" role="status"></p><div id="read-source-selector" class="read-source-selector">
+              <h3>Choose what to read</h3>
+              <p>Capture a snapshot, upload a file, or paste a link to start.</p>
+              <div class="source-buttons">
+                <button id="read-snapshot-btn" class="btn-primary">Camera snapshot</button>
+                <button id="read-upload-btn" class="btn-outline">Upload document</button>
+                <a href="?demo=1" class="btn-outline">Try sample demo</a>
+              </div>
+              <div class="url-control-group">
+                <input type="url" id="url-input" placeholder="Paste article link here...">
+                <button id="url-submit-btn" class="btn-primary">Go</button>
+              </div>
+              <input type="file" id="file-input" accept=".pdf,.png,.jpg,.jpeg,.webp" style="display: none;">
+            </div>
+            <div id="reading-text" style="position: relative; display: none;">
+              <p>The recognized text will appear here.</p>
+            </div>
+            <!-- Write Mode Panel -->
+            <div id="write-mode-panel" class="write-mode-panel" style="display: none;">
+              <div class="write-controls-top">
+                <div class="undo-redo-group">
+                  <button id="write-undo-btn" class="icon-btn" title="Undo">↩️</button>
+                  <button id="write-redo-btn" class="icon-btn" title="Redo">↪️</button>
+                </div>
+              </div>
+              
+              <div class="write-input-area" style="position: relative;">
+                <textarea id="write-textarea" placeholder="Start typing or use the mic..."></textarea>
+                <div id="write-highlight-overlay" class="highlight-overlay"></div>
+                <div id="word-predictions" class="word-predictions"></div>
+                <button id="write-fix-all-btn" class="fix-all-btn" style="display: none;">✨ Fix All</button>
+              </div>
+              <div id="prediction-bar" class="prediction-bar"></div>
+              <div class="write-actions">
+                <button id="write-stt-btn" class="btn mic-btn" title="Convert your voice to text">🎙 Speak</button>
+                <button id="write-ai-btn" class="btn btn-primary" title="Say 'Lexi, help me write...'">✨ AI Write</button>
+                <button id="write-readback-btn" class="btn" title="Listen to your text">Read my writing</button>
+              </div>
+              <div id="ai-suggestions" class="ai-suggestions" style="display: none;">
+                <div class="suggestion-header">💡 AI Suggestions</div>
+                <div id="suggestion-list"></div>
+              </div>
+            </div>
+            <!-- Form Mode Panel -->
+            <div id="form-mode-panel" class="form-mode-panel" style="display: none;">
+              <!-- Source Selection (Initial State) -->
+              <div id="form-source-selector" class="form-source-selector">
+                <h3>Select Form Source</h3>
+                <p>Upload a photo of your form or share your screen for live guidance.</p>
+                <div class="source-buttons">
+                  <button id="form-share-btn" class="btn-primary">🖥️ Share Screen</button>
+                  <button id="form-upload-btn" class="btn-outline">📁 Upload Image</button>
+                </div>
+              </div>
+              <!-- Active Form View (Hidden by default) -->
+              <div id="form-active-view" class="form-active-view" style="display: none;">
+                <div class="form-view-header">
+                   <span id="form-view-status">Live Guidance Active</span>
+                   <div class="header-actions" style="display: flex; gap: 8px;">
+                      <button id="form-popout-btn" class="btn-text" title="Pop out Lexi Sidekick">🚀 Sidekick</button>
+                      <button id="form-switch-source" class="btn-text">🔄 Switch Source</button>
+                   </div>
+                </div>
+                <div id="form-visual-container" class="form-visual-container">
+                   <!-- Captured image or screen video will go here -->
+                   <video id="form-screen-video" autoplay playsinline style="display: none;"></video>
+                   <img id="form-upload-img" style="display: none;">
+                </div>
+                
+                <div class="form-assistant-overlay">
+                   <div id="form-lexi-assistant" class="floating-lexi-btn" title="Ask Lexi about this form">
+                      <div class="lexi-avatar"></div>
+                      <span>Lexi Help</span>
+                   </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Selection Popup Button -->
+            <div id="selection-popup" class="selection-popup">
+              <button id="explain-selection-btn">Explain selected words</button>
+            </div>
+          </div>
+          <div class="control-bar toolbar unified-toolbar">
+            <!-- Sliding Tools Panel -->
+            </div>
+        <div class="reader-transport" role="group" aria-label="Read aloud"><button id="reader-play" type="button">Read aloud</button><button id="reader-stop" type="button" disabled>Stop</button><span id="reader-audio-status" role="status">Browser voice</span><div class="speed-control-wrapper" title="Voice Playback Speed">
+                <select id="voice-speed-select" class="btn-outline" style="padding: 9px 24px 9px 12px; appearance: none; cursor: pointer;">
+                  <option value="1.0">1.0× speed</option>
+                  <option value="0.9">0.9× speed</option>
+                  <option value="0.8">0.8× speed</option>
+                  <option value="0.7">0.7× speed</option>
+                  <option value="0.6">0.6× speed</option>
+                </select>
+              </div>
+              </div></div>
+      </div>
+    </div>
+  </div>
+  <div id="reading-ruler"></div>
+  <!-- Template for the Floating Sidekick Window -->
+  <template id="sidekick-template">
+    <div class="sidekick-container">
+      <div class="sidekick-avatar">
+        <div class="avatar-ring"></div>
+      </div>
+      <div class="sidekick-status">Lexi Sidekick</div>
+      <div class="sidekick-transcript">"I am here to help!"</div>
+      <div class="sidekick-controls">
+        <button id="sidekick-mic" class="sidekick-btn" title="Toggle Mic">🎙</button>
+      </div>
+    </div>
+  </template>
+  <script src="config.js"></script>
+  <script src="api-client.js"></script>
+  <script src="script.js"></script><script src="usability.js"></script>
+<script src="product.js"></script><script src="workflow.js"></script></body>
+</html>

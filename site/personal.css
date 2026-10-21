@@ -1,0 +1,26 @@
+/* Personal keepsakes on the notebook desk. */
+.notebook-shell{box-shadow:0 35px 55px -24px #30291e65,0 12px 18px -12px #30291e70,2px 3px 0 #1b211a}
+.identity-card{background:#eeead9;gap:15px;padding:16px 13px 18px;isolation:isolate}
+.identity-card .tape{width:80px;left:35%;opacity:.8}
+.personal-portrait{width:145px;flex:0 0 145px;margin:0;transform:rotate(-3deg);position:relative}
+.personal-portrait img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:contain;filter:drop-shadow(1px 3px 2px #54442b20)}
+.personal-portrait figcaption{font:16px/1.1 var(--hand);text-align:center;color:var(--red);margin-top:3px}
+.identity-card>div{flex:1;min-width:0}.identity-card b{font:700 20px/1.1 var(--hand);color:var(--blue)}
+.music-player{position:fixed;bottom:max(80px,calc(env(safe-area-inset-bottom) + 24px));right:max(18px,env(safe-area-inset-right));z-index:30;width:58px;height:58px;pointer-events:none}
+.cd-toggle{display:block;position:relative;background:none;border:0;padding:0;width:100%;height:100%;border-radius:50%;cursor:pointer;pointer-events:auto;opacity:.86;transition:opacity .2s,filter .2s}
+.cd-toggle:hover,.cd-toggle:focus-visible{opacity:1;filter:brightness(1.05)}
+.cd-toggle:focus-visible{outline:2px solid var(--red);outline-offset:5px}
+.cd-disc{display:grid;place-items:center;position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 30deg,#e6e5d8,#c9d6d5 13%,#f6efdc 23%,#d6cbd5 35%,#f0ecdd 48%,#bbcfc9 60%,#ece6d9 73%,#d5ced7 87%,#e6e5d8);box-shadow:inset 0 0 0 1px #adae9e,inset 0 0 0 5px #ffffff40,1px 3px 8px #40332425;animation:cd-spin 12s linear infinite;animation-play-state:paused}
+.cd-label{font:8px/1.2 var(--type);color:#675e43;background:#d8cba5;border-radius:50%;width:28px;height:28px;display:grid;place-content:center;text-align:center;border:1px solid #b9ab88}
+.cd-label:after{content:'';position:absolute;left:50%;top:50%;width:5px;height:5px;transform:translate(-50%,-50%);border-radius:50%;background:#f6efdf;border:1px solid #8f8e7e}
+.music-player[data-playing=true] .cd-disc{animation-play-state:running}
+footer{padding-bottom:92px!important}
+@keyframes cd-spin{to{transform:rotate(360deg)}}
+@media(max-width:1050px){.personal-portrait{width:115px;flex-basis:115px}.identity-card{gap:10px}.identity-card b{font-size:18px}.identity-card>div>span{font-size:8px}}
+@media(max-width:760px){.music-player{width:48px;height:48px;bottom:max(76px,calc(env(safe-area-inset-bottom) + 20px));right:max(12px,env(safe-area-inset-right))}.cd-label{width:24px;height:24px;font-size:7px}.personal-portrait{width:132px;flex-basis:132px}.identity-card b{font-size:19px}.identity-card>div>span{font-size:9px}}
+@media(max-width:390px){.personal-portrait{width:105px;flex-basis:105px}.identity-card{padding-inline:9px}.identity-card>div>span{font-size:8px}}
+@media(prefers-reduced-motion:reduce){.cd-disc{animation:none}}
+
+/* Keep the underlying email as an ordinary ASCII l for selection and copying. */
+.email-initial{display:inline-block;position:relative;width:.65em;color:transparent}
+.email-initial::after{content:"ℓ";position:absolute;left:0;bottom:-.03em;color:var(--blue);font:italic 1.35em/1 Georgia,"Times New Roman",serif;pointer-events:none}

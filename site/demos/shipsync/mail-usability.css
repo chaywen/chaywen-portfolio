@@ -1,0 +1,14 @@
+/* Small usability adjustments; original theme, navigation and workflows retained. */
+.app{height:100vh;height:100dvh}
+.main,.console-view,.panel,.inbox-panel,.detail-panel{min-width:0;min-height:0}
+.needs-strip{height:auto;min-height:44px;flex-wrap:wrap;gap:8px}
+.panel-head{flex-wrap:wrap;row-gap:10px}
+.filters{flex-wrap:wrap;gap:8px}
+.filters input,.filters select{min-height:34px}
+button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.ws-dropdown{max-width:calc(100vw - 24px)}
+.tbl-wrap,.table-wrap{overflow-x:auto}
+.list .row .sbj{min-width:0;overflow:hidden;text-overflow:ellipsis}
+@media(max-width:1000px){.sidebar{width:220px;flex-basis:220px}.app.collapsed .sidebar{width:72px;flex-basis:72px}.needs-strip{padding:10px 14px}.panel-head .filters{margin-left:0;width:100%}}
+@media(max-height:650px){.sidebar{overflow-y:auto;overflow-x:hidden}.ws-dropdown{max-height:60dvh;overflow:auto}.needs-strip{flex-shrink:0}.lc-topbar{height:auto;min-height:48px;flex-wrap:wrap;padding-block:8px}}
+@media(max-width:700px){.sidebar{width:180px;flex-basis:180px;padding-inline:9px}.navlink{padding-inline:10px}.needs-strip{gap:6px}.needs-chip{white-space:normal}.panel-head{padding:12px}.rr-header{padding:12px}.mail-stats{gap:6px}.lc-topbar{padding-inline:12px;flex-wrap:wrap}.lc-topbar .right{margin-left:0}}

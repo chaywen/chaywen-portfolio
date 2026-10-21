@@ -1,0 +1,10 @@
+BILL OF LADING (DRAFT)
+
+Shipper: Garden Export Sdn Bhd
+Consignee: Harbour Trading Ltd
+Notify Party: Harbour Trading Ltd
+Port of Loading: PORT KLANG (MYPKG)
+Port of Discharge: SINGAPORE (SGSIN)
+Container Count: 4
+Gross Weight (KG): 12000
+Booking Ref: DEMO-MISMATCH

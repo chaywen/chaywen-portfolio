@@ -1,0 +1,28 @@
+/* A flexible strip mesh, with real DOM content on both sides of the paper. */
+.book-stage{perspective:3200px;perspective-origin:50% 48%}
+@media(min-width:761px){.book-view{min-height:var(--book-height,640px)}}
+.book-view>.book-page{transform:none}
+.curl-sheet{position:absolute;left:50%;top:0;transform-origin:left center;transform-style:preserve-3d;z-index:10;pointer-events:none;will-change:transform;--binding-gap:7px}
+.curl-segment{position:absolute;top:0;transform-origin:left center;transform-style:preserve-3d}
+.curl-face{position:absolute;left:0;top:0;height:100%;overflow:hidden;backface-visibility:hidden;background:#f7f3e7}
+.curl-back{transform:rotateY(180deg)}
+.curl-content.book-page{position:absolute;top:0;margin:0;min-height:0;transform:none;box-shadow:none;border-radius:0;pointer-events:none}
+.still-page.book-page{position:absolute;top:0;left:0;width:calc(50% - 7px);height:100%;overflow:hidden;z-index:7;transform:none;box-shadow:none;margin:0}
+.still-page.still-right{left:calc(50% + 7px)}
+.paper-cast-shadow{position:absolute;top:1%;bottom:1%;left:50%;right:auto;width:0;background:linear-gradient(90deg,#3025119c,#30251155 35%,#30251100 100%);border-radius:5%;z-index:8;opacity:0;pointer-events:none;transform-origin:center}
+.book-pagination{padding:1px 9px 14px;gap:18px}
+.book-pagination button{font-size:18px;padding:5px 7px;color:#d6d0bc}
+.book-pagination button[aria-pressed=true]{color:#fff4d8}
+.pagination-tip{font-size:16px;color:#d1c8ac}
+.book-label{padding-bottom:8px}
+.book-turn-control{position:absolute;right:-33px;top:42%;z-index:22;width:72px}
+.book-turn-control button{display:flex;flex-direction:column;align-items:center;gap:7px;background:none;padding:0;width:72px;color:var(--red)}
+.turn-arrow-icon{display:grid;place-items:center;width:52px;height:52px;background:#f8f0d9;border:1px solid #b9a789;border-radius:50%;font:31px/1 var(--hand);box-shadow:1px 4px 0 #b2a183,0 7px 16px #3d301928;transition:transform .2s,background .2s}
+.turn-arrow-label{display:block;font:19px/1.1 var(--hand);background:#e9e1cc;padding:2px 7px 4px;border-radius:2px;white-space:nowrap;box-shadow:0 2px 2px #3d301912}
+.book-turn-control button:hover .turn-arrow-icon{background:#fff7e3;transform:translateX(3px)}
+.book-turn-control button:focus-visible{outline:2px solid var(--red);outline-offset:6px;border-radius:15px}
+.book-turn-control button:disabled{cursor:wait;opacity:.6}
+.book-turn-control button:disabled .turn-arrow-icon{transform:none}
+@media(max-width:1050px) and (min-width:761px){.still-page.book-page{width:calc(50% - 6px)}.still-page.still-right{left:calc(50% + 6px)}.pagination-tip{font-size:14px}.book-pagination button{font-size:17px}.book-pagination{gap:10px}.book-turn-control{right:-27px;width:60px}.book-turn-control button{width:60px}}
+@media(max-width:760px){.book-label{padding-bottom:9px}.book-pagination{padding:0 5px 14px;gap:10px}.book-pagination button{font-size:19px;padding:4px}.pagination-tip{font-size:15px;margin:0 0 0 4px;line-height:1.35;flex-basis:100%}.book-turn-control{top:240px;right:-8px;width:48px}.book-turn-control button{width:48px;gap:6px}.turn-arrow-icon{width:44px;height:44px;font-size:29px}.turn-arrow-label{font-size:15px;white-space:normal;padding:3px 5px;max-width:55px;text-align:center}.curl-sheet,.still-page,.paper-cast-shadow{display:none}.book-view>.book-page{transform:none}}
+@media(prefers-reduced-motion:reduce){.turn-arrow-icon{transition:none}}
