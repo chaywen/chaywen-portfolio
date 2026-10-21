@@ -268,13 +268,22 @@ function clearReviewSearch(){
 async function loadList(){
   const request = ++listRequest;
   try{
-    const data=await (await fetch(API+"/api/emails?limit=2000")).json();
+    const response=await fetch(API+"/api/emails?limit=2000");
+    if(!response.ok)throw new Error(`Inbox unavailable (HTTP ${response.status})`);
+    const data=await response.json();
     if(request !== listRequest) return;
-    state.all=(data&&data.items)||[];
+    if(!data||!Array.isArray(data.items))throw new Error('Inbox response is incomplete. Please retry.');
+    state.all=data.items;
     syncSourceOptions(state.all);
     applyReviewFilter();
     updateNeeds();
   }catch(err){
+    if(request !== listRequest)return;
+    if(state.all?.length){
+      document.getElementById('inbox-load-error')?.remove();
+      $("#list").insertAdjacentHTML('afterbegin',`<div id="inbox-load-error" class="inbox-load-error" role="status">Couldn't refresh. Your current inbox is kept below.<button type="button" class="btn" onclick="loadList()">Retry refresh</button></div>`);
+      return;
+    }
     $("#list").innerHTML=`<div class="empty"><span class="big">Failed to load inbox</span><span>${esc(err.message||"Network error")}</span><button class="btn" style="margin-top:6px" onclick="loadList()">Retry</button></div>`;
   }
 }
@@ -384,7 +393,7 @@ function renderReviewList(hasFilters){
     const active=r.email_id===state.active?"active":"";
     const hum=r.decided_by==="human"?'<span class="badge human" title="Reviewed & decided by human operator">👤 HUMAN</span>':"";
     const h=heatOf(r);
-    return `<div class="row ${active}" data-i="${i}" onclick="openEmail('${esc(r.email_id)}')">
+    return `<div class="row ${active}" data-i="${i}" role="button" tabindex="0" aria-label="Open ${esc(r.subject||'email')}" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="openEmail('${esc(r.email_id)}')">
       <span class="heat ${h.k}" style="--c:${h.tone};--o:${h.op}" role="img" aria-label="${esc(h.tip)}" title="${esc(h.tip)}"></span>
       <div class="top"><span class="sbj">${esc(r.subject||"(no subject)")}</span>${nextActionBadge(r)}</div>
       <div class="from"><span class="sender-address">${esc(r.from||"unknown sender")}</span><span class="id mail-record-id">${esc(r.email_id)}</span></div>
@@ -413,15 +422,21 @@ function setDock(html){
   d.hidden=!html;
 }
 let detailRequestVersion=0;
+let reviewListScrollTop=0;
 function backToEmailList(){
+  const previous=state.active;
   detailRequestVersion++;
   state.active=null;
   document.getElementById("viewReview").classList.remove("email-open");
   history.replaceState(null,"","#review");
-  loadList();
+  setDock("");
+  applyReviewFilter();
+  const list=document.getElementById('list');
+  if(list){list.scrollTop=reviewListScrollTop;[...list.querySelectorAll('.row')].find(row=>state.items[+row.dataset.i]?.email_id===previous)?.focus({preventScroll:true});}
 }
 window.backToEmailList=backToEmailList;
 async function openEmail(id){
+  if(!document.getElementById('viewReview').classList.contains('email-open'))reviewListScrollTop=document.getElementById('list')?.scrollTop||0;
   const requestVersion=++detailRequestVersion;
   document.getElementById("viewReview").classList.add("email-open");
   state.active=id;

@@ -13,7 +13,14 @@ window.addEventListener('DOMContentLoaded',()=>{
     $('mode-guidance').textContent=value==='read'?'Adjust the text size, or open Reading settings for your preferred font, spacing and reading tools.':value==='write'?'Write or dictate your text. Read my writing lets you listen back; suggestions use a connected Lexi session.':DEMO_MODE?'Form uploads and screen sharing require the configured application. Your reading settings are saved.':'Upload a form or share a screen, then ask Lexi about one field at a time.';
     $('reading-tools-panel').classList.add('hidden');$('reading-tools-btn').classList.remove('active-toggle');$('reading-tools-btn').setAttribute('aria-expanded','false');
   }
-  toggle.addEventListener('click',()=>help(collapsed));
+  toggle.addEventListener('click',()=>{
+    help(collapsed);
+    if(!collapsed&&window.matchMedia?.('(max-width:760px)').matches)$('lexi-assistant').scrollIntoView({block:'start',behavior:'auto'});
+  });
+  $('back-to-workspace').addEventListener('click',()=>{
+    document.querySelector('.right-panel').scrollIntoView({block:'start',behavior:'auto'});
+    const title=document.querySelector('.panel-title');title.tabIndex=-1;title.focus({preventScroll:true});
+  });
   $('explain-selection-btn').addEventListener('click',()=>help(true));
   $('write-ai-btn').addEventListener('click',()=>help(true));
   $('form-lexi-assistant').addEventListener('click',()=>help(true));

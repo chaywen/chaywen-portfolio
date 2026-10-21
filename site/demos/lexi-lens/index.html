@@ -43,7 +43,7 @@ style-src 'self' 'unsafe-inline';
         <!-- Unified Left Card -->
         <div class="card unified-card left-unified-card">
           
-          <div class="assistant-heading"><h2>Here to help</h2><p>Ask for a simpler explanation, or talk to Lexi.</p></div><details id="camera-preview"><summary>Camera preview</summary><div class="camera-feed unified-camera">
+          <div class="assistant-heading"><h2>Here to help</h2><p>Ask for a simpler explanation, or talk to Lexi.</p><button type="button" id="back-to-workspace">Back to workspace ↑</button></div><details id="camera-preview"><summary>Camera preview</summary><div class="camera-feed unified-camera">
             <div id="inline-error" class="inline-error"></div>
             <div id="snapshot-thumb" class="snapshot-thumb">
               <img id="snapshot-img" src="" alt="Snapshot Thumbnail">
@@ -110,11 +110,11 @@ style-src 'self' 'unsafe-inline';
                 <button id="view-original-btn" class="btn-outline active-toggle" style="padding: 4px 8px; font-size: 12px;">Original</button>
                 <button id="view-analyzed-btn" class="btn-outline" style="padding: 4px 8px; font-size: 12px;">Whole-text summary</button>
               </div>
-            <button id="change-source-btn" class="btn btn-outline" style="display: none;">🔄 Change Source</button>
+            <button id="change-source-btn" class="btn btn-outline" style="display: none;">Change document</button>
             <button type="button" id="assistant-toggle" aria-controls="lexi-assistant" aria-expanded="true">Hide help</button></div>
             <details id="sample-guide" class="sample-guide" hidden><summary>Try the reading sample</summary><ol><li>Use A+ or A− to find a comfortable text size. Reading settings contains font, spacing, paper colour and optional reading aids.</li><li>Try the Reading ruler or select a highlighted word for a prepared explanation.</li><li>Open Whole-text summary for prepared notes, or choose Read aloud to use your browser voice.</li></ol><p>Your text preferences are saved in this browser when storage is available. This sample does not connect to live AI, capture or uploads. Choose the tools that suit you; no reading aid is required.</p></details><p id="mode-guidance" class="mode-guidance" role="status"></p><div id="read-source-selector" class="read-source-selector">
               <h3>Choose what to read</h3>
-              <p>Capture a snapshot, upload a file, or paste a link to start.</p>
+              <p>Capture a snapshot, upload a file, or paste a link to start. Your current text stays available until a replacement loads.</p><button id="keep-source-btn" type="button" class="btn-outline" hidden>Return to current text</button>
               <div class="source-buttons">
                 <button id="read-snapshot-btn" class="btn-primary">Camera snapshot</button>
                 <button id="read-upload-btn" class="btn-outline">Upload document</button>
@@ -126,15 +126,15 @@ style-src 'self' 'unsafe-inline';
               </div>
               <input type="file" id="file-input" accept=".pdf,.png,.jpg,.jpeg,.webp" style="display: none;">
             </div>
-            <div id="reading-text" style="position: relative; display: none;">
+            <div id="reading-text" tabindex="-1" style="position: relative; display: none;">
               <p>The recognized text will appear here.</p>
             </div>
             <!-- Write Mode Panel -->
             <div id="write-mode-panel" class="write-mode-panel" style="display: none;">
               <div class="write-controls-top">
                 <div class="undo-redo-group">
-                  <button id="write-undo-btn" class="icon-btn" title="Undo">↩️</button>
-                  <button id="write-redo-btn" class="icon-btn" title="Redo">↪️</button>
+                  <button id="write-undo-btn" class="icon-btn" title="Undo" aria-label="Undo typing">↩️</button>
+                  <button id="write-redo-btn" class="icon-btn" title="Redo" aria-label="Redo typing">↪️</button>
                 </div>
               </div>
               
@@ -144,7 +144,7 @@ style-src 'self' 'unsafe-inline';
                 <div id="word-predictions" class="word-predictions"></div>
                 <button id="write-fix-all-btn" class="fix-all-btn" style="display: none;">✨ Fix All</button>
               </div>
-              <div id="prediction-bar" class="prediction-bar"></div>
+              <div id="prediction-bar" class="prediction-bar"></div><p id="write-save-status" class="write-save-status" role="status">Changes are saved in this browser when available.</p>
               <div class="write-actions">
                 <button id="write-stt-btn" class="btn mic-btn" title="Convert your voice to text">🎙 Speak</button>
                 <button id="write-ai-btn" class="btn btn-primary" title="Say 'Lexi, help me write...'">✨ AI Write</button>

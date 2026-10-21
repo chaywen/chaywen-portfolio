@@ -595,6 +595,12 @@ let suggestionTooltip = null;
 function initWriteMode() {
     const textarea = document.getElementById("write-textarea");
     if (!textarea) return;
+    try { const saved = localStorage.getItem("lexi_write_session"); if (saved !== null) textarea.value = saved; } catch (_) {}
+    writeHistory = [textarea.value];
+    writeRedoStack = [];
+    syncOverlay();
+    updateWriteButtons();
+    if (textarea.value) document.getElementById("write-save-status").textContent = "Previous writing restored.";
 
     textarea.addEventListener("input", () => {
         syncOverlay();
@@ -651,8 +657,24 @@ function saveState() {
     if (!writeHistory.length || writeHistory[writeHistory.length-1] !== val) {
         writeHistory.push(val);
         if (writeHistory.length > 50) writeHistory.shift();
+        writeRedoStack = [];
     }
-    localStorage.setItem("lexi_write_session", val);
+    persistWriteState();
+}
+
+function persistWriteState() {
+    let message = "Saved in this browser.";
+    try { localStorage.setItem("lexi_write_session", document.getElementById("write-textarea").value); }
+    catch (_) { message = "Text kept in this tab. Browser saving is unavailable."; }
+    const status = document.getElementById("write-save-status");
+    if (status && status.textContent !== message) status.textContent = message;
+    updateWriteButtons();
+}
+
+function updateWriteButtons() {
+    const undo = document.getElementById("write-undo-btn"), redo = document.getElementById("write-redo-btn");
+    if (undo) undo.disabled = writeHistory.length < 2;
+    if (redo) redo.disabled = !writeRedoStack.length;
 }
 
 function undoWrite() {
@@ -661,6 +683,7 @@ function undoWrite() {
         const textarea = document.getElementById("write-textarea");
         textarea.value = writeHistory[writeHistory.length-1];
         syncOverlay();
+        persistWriteState();
     }
 }
 
@@ -670,6 +693,7 @@ function redoWrite() {
         writeHistory.push(state);
         document.getElementById("write-textarea").value = state;
         syncOverlay();
+        persistWriteState();
     }
 }
 
@@ -1200,6 +1224,10 @@ function setupEvents() {
     document.getElementById("read-snapshot-btn")?.addEventListener("click", takeSnapshot);
     document.getElementById("read-upload-btn")?.addEventListener("click", () => document.getElementById("file-input").click());
     document.getElementById("change-source-btn")?.addEventListener("click", resetReadSource);
+    document.getElementById("keep-source-btn")?.addEventListener("click", () => {
+        finalizeReadSource();
+        document.getElementById("reading-text").focus({preventScroll: false});
+    });
     document.getElementById("file-input")?.addEventListener("change", (e) => handleUpload(e.target.files));
     document.getElementById("url-submit-btn")?.addEventListener("click", fetchUrl);
     document.getElementById("mode-toggle")?.addEventListener("click", () => {
@@ -1410,10 +1438,12 @@ function clearSentenceHighlight() {
 
 function finalizeReadSource() {
     isRealContentActive = true;
+    const isRead = currentMode === "read";
     document.getElementById("read-source-selector").style.display = "none";
-    document.getElementById("reading-text").style.display = "block";
-    document.getElementById("change-source-btn").style.display = "block";
-    if (rawText.length > 10) document.getElementById("view-toggle-container").style.display = "flex";
+    document.getElementById("reading-text").style.display = isRead ? "block" : "none";
+    document.getElementById("change-source-btn").style.display = isRead ? "block" : "none";
+    const keep = document.getElementById("keep-source-btn"); if (keep) keep.hidden = true;
+    document.getElementById("view-toggle-container").style.display = isRead && rawText.length > 10 ? "flex" : "none";
 }
 
 let currentView = "original";
@@ -1444,19 +1474,13 @@ async function switchView(type) {
 }
 
 function resetReadSource() {
-    rawText = ""; originalHTML = ""; analyzedHTML = ""; currentView = "original"; window.difficultDictMap = {};
-    document.getElementById("view-original-btn").classList.add("active-toggle");
-    document.getElementById("view-analyzed-btn").classList.remove("active-toggle");
-    isRealContentActive = false;
-    document.getElementById("reading-text").innerHTML = "";
+    // Choosing a replacement is reversible. Keep content and notes until a new source succeeds.
+    const keep = document.getElementById("keep-source-btn"); if (keep) keep.hidden = !isRealContentActive;
     document.getElementById("reading-text").style.display = "none";
     document.getElementById("read-source-selector").style.display = "block";
     document.getElementById("change-source-btn").style.display = "none";
     document.getElementById("view-toggle-container").style.display = "none";
     
-    // Hide thumbnail
-    const thumb = document.getElementById("snapshot-thumb");
-    if (thumb) thumb.style.display = "none";
 }
 
 function handleGlobalTooltip(e) {

@@ -1974,13 +1974,13 @@ const LS_RECENT = "sdoc_mail_recent";   /* [id,…] newest first */
 const LS_FREQ   = "sdoc_mail_freq";     /* {"status:OK":3,…} → palette pins */
 
 const readLS = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k)); return v == null ? d : v; } catch(_) { return d; } };
-const writeLS = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch(_) {} };
+const writeLS = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch(_) { return false; } };
 
 let FLAGS  = readLS(LS_FLAGS, {});
 let OUTBOX = readLS(LS_OUTBOX, []);
 const flagsOf  = id => FLAGS[id] || (FLAGS[id] = {});
 function saveFlags(){ writeLS(LS_FLAGS, FLAGS); }
-function saveOutbox(){ writeLS(LS_OUTBOX, OUTBOX); }
+function saveOutbox(){ return writeLS(LS_OUTBOX, OUTBOX); }
 
 const state = {
   emails: [], ships: {}, by: null,
@@ -3346,8 +3346,9 @@ function saveComposed(kind){
     at:new Date().toLocaleString([], {month:"short", day:"numeric", hour:"2-digit", minute:"2-digit"}),
     kind, shipment:it ? it.shipment : ""
   };
-  if(editingDraftId) OUTBOX=OUTBOX.filter(o=>o.id!==editingDraftId);
-  OUTBOX.unshift(rec); saveOutbox();
+  const previousOutbox=OUTBOX;
+  OUTBOX=[rec,...OUTBOX.filter(o=>o.id!==rec.id)];
+  if(saveOutbox()===false){OUTBOX=previousOutbox;$("cmpHint").textContent='Draft could not be saved in this browser. Your message is still open; copy it before leaving.';toast('Draft not saved. Your message is kept in the editor.');return;}
   closeComposer();
   toast("Draft saved only in this browser.", {label:"Open Drafts", run:() => setBox("drafts")});
   renderKPIs(); renderRail(); renderList();

@@ -7,4 +7,6 @@
 #app[data-mode=read] .mode-guidance,#app[data-mode=form][data-sample=false] .mode-guidance{display:none}
 .sample-guide{font:13px/1.75 Arial,sans-serif;color:var(--muted);margin:0 0 18px;border-bottom:1px solid var(--border);padding-bottom:10px;max-width:75ch}.sample-guide[hidden]{display:none!important}.sample-guide summary{cursor:pointer;color:var(--accent);padding-block:5px}.sample-guide ol{padding-left:22px;margin:10px 0}.sample-guide li{margin-block:6px}.sample-guide p{margin:10px 0 0}
 #write-mode-panel .write-actions{gap:8px;flex-wrap:wrap}#write-mode-panel .write-controls-top{padding-bottom:10px;border-bottom:1px solid var(--border)}
+.write-save-status{font:12px/1.6 Arial,sans-serif;color:#71645f;margin:8px 0;min-height:1.6em}#back-to-workspace{display:none}#keep-source-btn[hidden]{display:none!important}#keep-source-btn{margin:8px 0 14px}
+@media(max-width:760px){#back-to-workspace{display:inline-block;margin-top:12px}.reader-transport button,.panel-header button{min-height:40px}.assistant-heading{scroll-margin-top:12px}}
 @media(max-width:760px){.reading-settings{padding:10px 12px}.reading-settings .settings-label{font-size:11px;margin-right:0}.reading-settings #reading-tools-btn{margin-left:auto;font-size:11px}#reader-size{min-width:34px}.mode-guidance{margin-block:10px 16px}.panel-header{gap:8px}#assistant-toggle{padding:7px 10px;min-height:34px}}
