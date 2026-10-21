@@ -18,7 +18,7 @@ Open `http://localhost:8080/`. The static entry point is `site/index.html`. No b
 
 `site/demos/lexi-lens/` is permanently in sample mode. Prepared text and browser reading tools are available; live AI and capture are unavailable.
 
-The website distinguishes original team capabilities, my original responsibilities and later personal refinements. Full application sources are maintained in separate personal-edition repositories. Original team repositories: [ShipSync](https://github.com/chaywen/averis-hackathon-2026) and [Lexi-Lens](https://github.com/chaywen/lexi-lens).
+The website distinguishes original team capabilities, my original responsibilities and later personal refinements. Full application sources are maintained in separate private personal-edition repositories: [ShipSync personal edition](https://github.com/chaywen/shipsync-personal) and [Lexi-Lens personal edition](https://github.com/chaywen/lexi-lens-personal). These links require access while the repositories remain private. Original team repositories: [ShipSync](https://github.com/chaywen/averis-hackathon-2026) and [Lexi-Lens](https://github.com/chaywen/lexi-lens).
 
 ## Ownership and assets
 
