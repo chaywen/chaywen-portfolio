@@ -1399,7 +1399,7 @@ table.list tbody tr.sel .key{color:var(--accent)}
 
 .outbound-policy-bar{padding:12px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;border-bottom:1px solid var(--border);background:var(--surface)}.outbound-policy-bar .cg-item{display:flex;align-items:center;gap:10px}.policy-hint{font-size:11px;color:var(--muted)}#viewReview.email-open .outbound-policy-bar{display:none}#outApprovalStatus{font-size:12px;color:var(--accent)}#outReturnModal button:disabled{opacity:.45;cursor:not-allowed}</style>
 <link rel="stylesheet" href="usability.css"><link rel="stylesheet" href="product.css"><script defer src="product.js"></script><link rel="stylesheet" href="workflow.css"><script defer src="workflow.js"></script><style>.portfolio-mode-note{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:7px 16px;font:11px/1.5 system-ui;background:var(--surface-2);color:var(--muted);border-bottom:1px solid var(--border)}.portfolio-mode-note a{color:var(--accent);text-decoration:none}.portfolio-mode-note button{border:0;background:none;color:var(--muted);font:inherit;cursor:pointer;padding:0;margin-left:auto}#portfolio-action-message{position:fixed;right:16px;bottom:16px;max-width:min(480px,calc(100vw - 32px));padding:14px 18px;background:var(--surface-2);border:1px solid var(--border-strong);box-shadow:var(--shadow);border-radius:8px;font:13px/1.6 system-ui;color:var(--text);z-index:100000;cursor:pointer}#portfolio-action-message[hidden]{display:none!important}body{display:flex;flex-direction:column;height:100vh;height:100dvh;min-height:0}.portfolio-mode-note{flex:0 0 auto}.app,.mail-app{flex:1 1 0;min-height:0;height:auto!important}.mail-body{min-height:0;flex:1 1 0}@media(max-width:700px){.portfolio-mode-note{gap:10px;padding:7px 10px}.portfolio-mode-note span{display:none}}.portfolio-guide{font:inherit}.portfolio-guide summary{cursor:pointer;color:var(--accent)}.portfolio-guide[open]{flex-basis:100%}.portfolio-guide>div{max-width:85ch;font-size:12px;line-height:1.75;padding:6px 0 10px;max-height:35dvh;overflow:auto}.portfolio-guide ol{padding-left:20px;margin:8px 0}.portfolio-guide p{margin:8px 0 0}.portfolio-guide a{text-decoration:underline}.portfolio-guide li{margin-block:5px}</style></head>
-<body data-page-node-id="wzcVVSuVBtDzNxMgWcXGVQ"><div class="portfolio-mode-note" role="note"><span>Interactive sample · no live mailbox</span><a href="interface.html">Enterprise Hub</a><a href="mail-interface.html">ShipMail</a><button type="button" id="portfolio-status-help">Connection info</button><details class="portfolio-guide"><summary>Try a sample case</summary><div><ol><li><a href="interface.html#sample_mismatch">Open a document mismatch</a>, then inspect the email and Documents tab.</li><li>Use Compare to review the values. The Read email and Documents tabs retain the original evidence.</li><li>Explore Record decision and Prepare reply. Saving decisions, approvals and sending require the full backend; this sample never submits them.</li></ol><p>Also try <a href="interface.html#sample_missing">missing documents</a> or <a href="interface.html#sample_match">a matching case</a>. All records are synthetic. In ShipMail, Compose can save a local draft without sending.</p></div></details></div><div id="portfolio-action-message" role="status" aria-live="polite" hidden></div>
+<body data-page-node-id="wzcVVSuVBtDzNxMgWcXGVQ"><div class="portfolio-mode-note" role="note"><span>Interactive sample · no live mailbox</span><button type="button" id="portfolio-status-help">Connection info</button><details class="portfolio-guide"><summary>Try a sample case</summary><div><ol><li><a href="interface.html#sample_mismatch">Open a document mismatch</a>, then inspect the email and Documents tab.</li><li>Use Compare to review the values. The Read email and Documents tabs retain the original evidence.</li><li>Explore Record decision and Prepare reply. Saving decisions, approvals and sending require the full backend; this sample never submits them.</li></ol><p>Also try <a href="interface.html#sample_missing">missing documents</a> or <a href="interface.html#sample_match">a matching case</a>. All records are synthetic. In ShipMail, Compose can save a local draft without sending.</p></div></details></div><div id="portfolio-action-message" role="status" aria-live="polite" hidden></div>
 <div class="app" data-page-node-id="qazEggtcA0P6goKeGKu5rm">
   <!-- ===================== SIDEBAR ===================== -->
   <aside class="sidebar" data-page-node-id="nPrwB4Jt2IEtpnUXVOvRca">
@@ -1456,7 +1456,6 @@ table.list tbody tr.sel .key{color:var(--accent)}
         <span>Gateway &amp; Sandbox</span>
         <span class="hk">0</span>
       </button>
-      <a class="navlink shipmail-link" href="mail-interface.html" aria-label="Open ShipMail">✉ <span>ShipMail</span></a>
 <button class="navlink active" id="navReview" type="button" onclick="switchView('review')" data-tip="Review &amp; Reply" data-tip-desc="Email-centric console: process 520 inbox and review SI ↔ BL mismatches" data-tip-kbd="1" data-tip-pos="right" aria-label="Review &amp; Reply">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
         <span>Review &amp; Reply</span>
@@ -1600,12 +1599,7 @@ table.list tbody tr.sel .key{color:var(--accent)}
   <button class="btn" onclick="loadSummary();loadList()" aria-label="Refresh emails">↻ Refresh</button>
   <details id="reviewMore" class="mail-more">
     <summary class="btn" aria-label="More email options">⋯</summary>
-    <div class="mail-menu"><button class="btn" onclick="switchView('history')">History</button></div>
-  </details>
-</section>
-    <!-- VIEW 2: REVIEW CONSOLE (DEFAULT ACTIVE) -->
-    <div id="viewReview" class="console-view">
-<details class="policy-disclosure"><summary>Reply policy &amp; source overrides</summary><div class="outbound-policy-bar">          <div class="cg-item">
+    <div class="mail-menu"><button class="btn" onclick="switchView('history')">History</button><details class="policy-disclosure"><summary>Reply policy &amp; source overrides</summary><div class="outbound-policy-bar">          <div class="cg-item">
             <span>↩️ Outbound Policy:</span>
             <select class="select-ctl" id="outSelMode" onchange="Outstream.setGlobalDisposition()">
               <option value="manual">🛡️ Manual (approval required)</option>
@@ -1613,7 +1607,12 @@ table.list tbody tr.sel .key{color:var(--accent)}
             </select>
             <button class="btn btn-sm mx-kebab" id="outKebab" type="button" data-tip="Per-source reply policy" onclick="Outstream.openMatrixModal()">&#8943; <span id="outKebabSum">sources</span></button>
           </div>
-<span class="policy-hint">Source and per-email overrides take priority. Changes affect future sends.</span></div></details>
+<span class="policy-hint">Source and per-email overrides take priority. Changes affect future sends.</span></div></details></div>
+  </details>
+</section>
+    <!-- VIEW 2: REVIEW CONSOLE (DEFAULT ACTIVE) -->
+    <div id="viewReview" class="console-view">
+
       <div class="workspace" data-page-node-id="xr4E9BDPd4SXGX5HsNUsrU">
         <!-- INBOX -->
         <div class="panel inbox-panel" data-page-node-id="RwHteb1iAdPXmvmNCdy571">

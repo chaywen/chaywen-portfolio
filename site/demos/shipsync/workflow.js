@@ -90,10 +90,7 @@
   function mail(){
     const source=document.getElementById('gmailRow')?.closest('.rail-card');
     if(source&&!source.querySelector('.mail-connections')){const settings=node('details','mail-connections');settings.append(node('summary','','Mail connections'));const content=node('div','mail-connection-options');while(source.firstChild)content.append(source.firstChild);settings.append(content);source.append(settings);}
-    const compose=document.getElementById('composeBtn');if(compose&&!document.getElementById('mailbox-tools')){
-      const tools=node('details','mailbox-tools');tools.id='mailbox-tools';tools.append(node('summary','','Mailbox tools'));
-      const triage=node('button','btn','Mailbox triage & assignment');triage.type='button';triage.addEventListener('click',()=>window.rvSetMode('review'));tools.append(triage);compose.after(tools);
-    }
+
   }
   function setup(){
     workspaceMenu();

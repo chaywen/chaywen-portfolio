@@ -12,3 +12,6 @@ Run `python scripts/audit_repository.py` to repeat the candidate-file scan. Crea
 Browser visual QA and real external-service end-to-end testing remain outstanding. Hosted synthetic project samples do not authorize real accounts, persist server decisions or send email. The new repository stays private pending review of public-sharing scope and asset notices.
 
 Recovery-flow release: reversible document changes, restored writing and undo / redo persistence, mobile workspace return, cached inbox recovery and honest draft-save errors. Added isolated state checks pass. Browser DOM checks were partial; screenshots and some actions were unreliable, so full device visual QA remains outstanding.
+
+## Navigation and title 2026-10-22
+Removed the rectangular per-letter texture overlay behind Portfolio. ShipSync samples retain a single workspace dropdown; Mail triage stays in its personal workspace. Duplicate banner and sidebar workspace links were removed. Reply policy remains under More, and the review header is compact. Local assets, anchors, sample contracts, navigation state, workspace menus, recovery and inline syntax checks pass. Browser preview timed out, so post-deployment visual verification remains outstanding.

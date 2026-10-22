@@ -18,3 +18,24 @@
 #composer{padding:12px}#composer .composer-card{width:min(620px,100%);max-height:calc(100dvh - 24px)}#composer .composer-head,#composer .composer-foot{flex-shrink:0}#composer .composer-body{min-height:0}
 @media(max-width:600px){#composer .composer-foot{flex-wrap:wrap}#composer input,#composer textarea{font-size:16px}#composer .btn,#composer .x{min-height:40px}}
 @media(max-width:900px){.gateway-settings{width:100%;margin-left:0}.gateway-settings-content{flex-direction:column}.gateway-settings-content select{max-width:100%}.review-flow{gap:6px}.review-flow button{font-size:10px;padding:7px}.flow-send-note{width:100%;padding:2px}}
+
+/* One workspace switcher, scoped navigation and a compact review toolbar. */
+.rr-header{min-height:44px;padding:6px 16px;gap:12px;background:var(--surface);border-inline:0;border-radius:0}
+.rr-header h2{font-size:15px;line-height:1.4;flex:1;min-width:0;white-space:normal}
+.rr-header>.btn,.rr-header>.mail-more>summary{font-size:11px;min-height:30px;padding:4px 9px}
+.rr-header .queue-summary{position:relative;font-size:11px}
+.rr-header .queue-summary>summary{cursor:pointer;padding:5px 0;white-space:nowrap}
+.rr-header .queue-summary[open] .mail-stats{position:absolute;right:0;top:100%;z-index:80;width:min(360px,calc(100vw - 36px));display:grid;grid-template-columns:repeat(2,minmax(0,1fr));padding:12px;background:var(--surface);border:1px solid var(--border);border-radius:9px;box-shadow:var(--shadow)}
+.rr-header .mail-menu{width:min(340px,calc(100vw - 36px));max-height:60dvh;overflow:auto;z-index:80}
+.rr-header .policy-disclosure{border:0;background:transparent;margin:5px 0 0}
+.rr-header .policy-disclosure>summary{padding:9px 5px;cursor:pointer;font-size:11px}
+.rr-header .outbound-policy-bar{padding:8px 4px;display:flex;flex-direction:column;align-items:stretch;gap:8px}
+.rr-header .outbound-policy-bar .cg-item{display:flex;flex-wrap:wrap;gap:7px;align-items:center}
+.needs-strip{min-height:32px!important;padding:4px 16px!important;gap:6px}
+.needs-strip .needs-chip{height:23px;font-size:10px;padding:0 8px}
+.needs-strip .needs-lbl{font-size:9px}
+.needs-strip .needs-updated{font-size:10px}
+.mail-app .rv-switch{display:flex;flex-direction:column;gap:4px}
+.mail-app .rv-sw-btn{justify-content:flex-start;flex:none;font-size:11px;padding:8px 10px;text-align:left}
+.mail-app .rv-sw-btn span{white-space:normal}
+@media(max-width:700px){.rr-header{padding:6px 10px;gap:8px}.rr-header h2{font-size:14px}.needs-strip{padding:4px 10px!important}.needs-lbl{display:none}.rr-header .queue-summary>summary{font-size:10px}}
