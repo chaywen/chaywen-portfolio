@@ -21,6 +21,3 @@ footer{padding-bottom:92px!important}
 @media(max-width:390px){.personal-portrait{width:105px;flex-basis:105px}.identity-card{padding-inline:9px}.identity-card>div>span{font-size:8px}}
 @media(prefers-reduced-motion:reduce){.cd-disc{animation:none}}
 
-/* Keep the underlying email as an ordinary ASCII l for selection and copying. */
-.email-initial{display:inline-block;position:relative;width:.65em;color:transparent}
-.email-initial::after{content:"ℓ";position:absolute;left:0;bottom:-.03em;color:var(--blue);font:italic 1.35em/1 Georgia,"Times New Roman",serif;pointer-events:none}
